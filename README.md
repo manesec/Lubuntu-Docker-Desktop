@@ -1,6 +1,8 @@
 # Lubuntu-Docker-Desktop
 Run Lubuntu Desktop in Docker container.  XRDP support only !!
 
+[中文](README_ZH.md)
+
 ![image](img/1.png)
 
 ![image](img/2.png)
