@@ -1,7 +1,7 @@
 # Lubuntu-Docker-Desktop
 在 Docker 容器内運行 Lubuntu Desktop，使用RDP协议链接。
 
-注意: 僅支持 RDP 协议，VNC 等协议没有安装。
+注意: 僅支持 RDP 协议。
 
 ![圖片](img/1.png)
 
@@ -9,30 +9,41 @@
 
 
 ## 功能
-+ 基于 Ubuntu 23.10
++ 基於 Ubuntu 23.10
 + LXQt 1.3.0
-+ 支持 XRDP 音頻輸出（用pulseaudio-module-xrdp 修補）
++ 支持 XRDP 音頻輸出（使用 pulseaudio-module-xrdp 補丁）
 + 使用 `apt-fast` 來加速 apt 下載
 + LXQT 桌面環境，簡單輕量
 + 易於修改源代碼
 + 僅RDP協議
++ 内置 Firefox, Chrome, Vscode
 
-## 如何運行？
+## 快速运行
 
-```bash
+**注意：** 如果運行在PVE的LXC裡面的docker，需要額外設置，請看下面的常見問題！！
+
+``` bash
+docker run -p 3389:3389 -it --cap-add=SYS_ADMIN --shm-size 1g --device /dev/fuse:/dev/fuse --rm manesec/lubuntu-desktop /bin/RunOnce.sh mane maneisagoodman
+```
+
+一旦啓動完成，就可以使用RDP連接。
+
+參數解释：
++ `--cap-add=SYS_ADMIN` 和 `--shm-size 1g` ：用於 google-chrome 和 firefox，不然会容易崩溃。
++ `--device /dev/fuse:/dev/fuse` 修復 AppImage 类型的APP错误。
++ `mane` 是登錄RDP的用戶名，隨意修改。
++ `maneisagoodman` 是登錄RDP的密碼，隨意修改。
+
+X64運行良好，arm應該不工作（未測試），X86未測試。
+
+## 如何编译？
+
+``` bash
 git clone https://github.com/manesec/Lubuntu-Docker-Desktop.git Lubuntu-Docker-Desktop
 cd Lubuntu-Docker-Desktop
 docker build -t mylubuntu .
 docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --shm-size 1g --device /dev/fuse:/dev/fuse --rm mylubuntu /bin/RunOnce.sh mane maneisagoodman
 ````
-
-解释：
-+ `--cap-add=SYS_ADMIN` 和 `--shm-size 1g` ：用於 google-chrome 和 firefox，不然会容易崩溃。
-+ `--device /dev/fuse:/dev/fuse` 修復 AppImage 类型的APP错误。
-+ `mane` 是登錄用戶名,隨意修改。
-+ `maneisagoodman` 是登錄密碼,隨意修改。
-
-X64運行良好，arm应该不工作（未测试），X86未测试。
 
 ## `software` 文件夾
 
@@ -63,11 +74,18 @@ root@manepc:/home/mane/Lubuntu-Docker-Desktop# docker run -p 3389:3389 -it --ini
 ...
 ````
 
-我強烈建議使用 `sudo -s` 來使用 root 用戶。
+我強烈建議使用 `sudo -s` 來提升 root 用戶。
 
 ## 常見問題：沒有聲音輸出？
 
 您可能需要以 root 用戶身份運行 `pulseaudio -D`。
 
-＃ 執照
+
+# 有問題？
+
+請隨意發起Github的issue。
+
+# 許可證
+
 GNU 通用公共許可證 v3.0
+
