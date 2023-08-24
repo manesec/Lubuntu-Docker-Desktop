@@ -41,13 +41,13 @@ X64運行良好，arm應該不工作（未測試），X86未測試。
 ``` bash
 git clone https://github.com/manesec/Lubuntu-Docker-Desktop.git Lubuntu-Docker-Desktop
 cd Lubuntu-Docker-Desktop
-docker build -t mylubuntu .
-docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --shm-size 1g --device /dev/fuse:/dev/fuse --rm mylubuntu /bin/RunOnce.sh mane maneisagoodman
+docker build -t lubuntu-desktop .
+docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --shm-size 1g --device /dev/fuse:/dev/fuse --rm lubuntu-desktop /bin/RunOnce.sh mane maneisagoodman
 ````
 
 ## `software` 文件夾
 
-當您使用`docker build -t mylubuntu .` 構建 docker 映像時，它將在 `software` 文件夾里執行所有.sh 文件。
+當您使用`docker build -t lubuntu-desktop .` 構建 docker 映像時，它將在 `software` 文件夾里執行所有.sh 文件。
 
 要禁用它，只需更改不帶`.sh`的名稱，例如：
 
@@ -67,7 +67,7 @@ docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --shm-size 1g --device /d
 root密碼是隨機的，啟動容器時可以查看。
 
 ````bash
-root@manepc:/home/mane/Lubuntu-Docker-Desktop# docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --device /dev/fuse:/dev/fuse --shm-size 1g --rm mylubuntu /bin/ RunOnce.sh mane maneisagoodman
+root@manepc:/home/mane/Lubuntu-Docker-Desktop# docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --device /dev/fuse:/dev/fuse --shm-size 1g --rm lubuntu-desktop /bin/RunOnce.sh mane maneisagoodman
 ...
 [*] 隨機密碼
 根密碼：8bfb45234ecf8d11b346
