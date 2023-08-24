@@ -1,5 +1,7 @@
-# Lubuntu-Docker-桌面
-在 Docker 容器内運行 Lubuntu Desktop，注意: 僅支持 XRDP！
+# Lubuntu-Docker-Desktop
+在 Docker 容器内運行 Lubuntu Desktop，使用RDP协议链接。
+
+注意: 僅支持 RDP 协议，VNC 等协议没有安装。
 
 ![圖片](img/1.png)
 
@@ -7,11 +9,13 @@
 
 
 ## 功能
-+ 支持 XRDP 音頻輸出（用pulseaudio-module-xrdp 修補）。
-+ 使用 `apt-fast` 來加速 apt 下載。
-+ LXQT 桌面環境，簡單輕量。
-+ 易於修改源代碼。
-+ 僅RDP協議。
++ 基于 Ubuntu 23.10
++ LXQt 1.3.0
++ 支持 XRDP 音頻輸出（用pulseaudio-module-xrdp 修補）
++ 使用 `apt-fast` 來加速 apt 下載
++ LXQT 桌面環境，簡單輕量
++ 易於修改源代碼
++ 僅RDP協議
 
 ## 如何運行？
 
@@ -19,16 +23,16 @@
 git clone https://github.com/manesec/Lubuntu-Docker-Desktop.git Lubuntu-Docker-Desktop
 cd Lubuntu-Docker-Desktop
 docker build -t mylubuntu .
-docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --shm-size 1g --privileged --rm mylubuntu /bin/RunOnce.sh mane maneisagoodman
+docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --shm-size 1g --device /dev/fuse:/dev/fuse --rm mylubuntu /bin/RunOnce.sh mane maneisagoodman
 ````
 
-注意：
-+ `--cap-add=SYS_ADMIN` 和 `--shm-size 1g` ：用於 google-chrome 和 firefox，不然很容易崩溃。
-+ `--privileged` 修復 nextcloud 應用程序錯誤，為了安全可以去掉這行。
+解释：
++ `--cap-add=SYS_ADMIN` 和 `--shm-size 1g` ：用於 google-chrome 和 firefox，不然会容易崩溃。
++ `--device /dev/fuse:/dev/fuse` 修復 AppImage 类型的APP错误。
 + `mane` 是登錄用戶名,隨意修改。
 + `maneisagoodman` 是登錄密碼,隨意修改。
 
-X64運行良好，arm不工作。
+X64運行良好，arm应该不工作（未测试），X86未测试。
 
 ## `software` 文件夾
 
@@ -39,14 +43,20 @@ X64運行良好，arm不工作。
 + 我不打算安裝 google-chrome：把，將 `software` 文件夾里的 `chrome.sh` 更改為`chrome.disable` 就可以了。
 
 
-＃ 常問問題
+# 常問問題
+
+## FAQ: 我在 LXC 容器里面安装Docker，然后在Docker里面安装，需要做什么？ （类似PVE环境）
+
+![image](img/3.png)
+
+只需要启用 LXC 的 Fuse 功能即可。
 
 ## 常見問題：root 密碼是什麼？
 
 root密碼是隨機的，啟動容器時可以查看。
 
 ````bash
-root@manepc:/home/mane/Lubuntu-Docker-Desktop# docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --privileged --shm-size 1g --rm mylubuntu /bin/ RunOnce.sh mane maneisagoodman
+root@manepc:/home/mane/Lubuntu-Docker-Desktop# docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --device /dev/fuse:/dev/fuse --shm-size 1g --rm mylubuntu /bin/ RunOnce.sh mane maneisagoodman
 ...
 [*] 隨機密碼
 根密碼：8bfb45234ecf8d11b346
