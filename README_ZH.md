@@ -17,6 +17,7 @@
 + 易於修改源代碼
 + 僅RDP協議
 + 内置 Firefox, Chrome, Vscode
++ RDP 的複製粘貼可以工作
 
 ## 快速运行
 
@@ -42,7 +43,7 @@ X64運行良好，arm應該不工作（未測試），X86未測試。
 git clone https://github.com/manesec/Lubuntu-Docker-Desktop.git Lubuntu-Docker-Desktop
 cd Lubuntu-Docker-Desktop
 docker build -t lubuntu-desktop .
-docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --shm-size 1g --device /dev/fuse:/dev/fuse --rm lubuntu-desktop /bin/RunOnce.sh mane maneisagoodman
+docker run -p 3389:3389 -it --cap-add=SYS_ADMIN --shm-size 1g --device /dev/fuse:/dev/fuse --rm lubuntu-desktop /bin/RunOnce.sh mane maneisagoodman
 ````
 
 ## `software` 文件夾
@@ -67,7 +68,7 @@ docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --shm-size 1g --device /d
 root密碼是隨機的，啟動容器時可以查看。
 
 ````bash
-root@manepc:/home/mane/Lubuntu-Docker-Desktop# docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --device /dev/fuse:/dev/fuse --shm-size 1g --rm lubuntu-desktop /bin/RunOnce.sh mane maneisagoodman
+root@manepc:/home/mane/Lubuntu-Docker-Desktop# docker run -p 3389:3389 -it --cap-add=SYS_ADMIN --device /dev/fuse:/dev/fuse --shm-size 1g --rm lubuntu-desktop /bin/RunOnce.sh mane maneisagoodman
 ...
 [*] 隨機密碼
 根密碼：8bfb45234ecf8d11b346

@@ -17,6 +17,7 @@ Run Lubuntu Desktop in Docker container.  XRDP support only !!
 + Easy to modify source code.
 + RDP Only.
 + Installed Firefox, Chrome, Vscode.
++ RDP Copy and paste working.
 
 ## Quick Run
 
@@ -43,7 +44,7 @@ X64 working good, I have not test for arm and X86.
 git clone https://github.com/manesec/Lubuntu-Docker-Desktop.git Lubuntu-Docker-Desktop
 cd Lubuntu-Docker-Desktop
 docker build -t lubuntu-desktop .
-docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --shm-size 1g  --device /dev/fuse:/dev/fuse --rm lubuntu-desktop /bin/RunOnce.sh mane maneisagoodman
+docker run -p 3389:3389 -it --cap-add=SYS_ADMIN --shm-size 1g  --device /dev/fuse:/dev/fuse --rm lubuntu-desktop /bin/RunOnce.sh mane maneisagoodman
 ```
 
 
@@ -70,7 +71,7 @@ You should enable Fuse in LXC.
 The root password is random, you can check when you start the container.
 
 ```bash
-root@manepc:/home/mane/Lubuntu-Docker-Desktop# docker run -p 3389:3389 -it --init --cap-add=SYS_ADMIN --device /dev/fuse:/dev/fuse --shm-size 1g --rm lubuntu-desktop /bin/RunOnce.sh mane maneisagoodman
+root@manepc:/home/mane/Lubuntu-Docker-Desktop# docker run -p 3389:3389 -it --cap-add=SYS_ADMIN --device /dev/fuse:/dev/fuse --shm-size 1g --rm lubuntu-desktop /bin/RunOnce.sh mane maneisagoodman
 ...
 [*] Random Password
 Root Password: 8bfb45234ecf8d11b346
