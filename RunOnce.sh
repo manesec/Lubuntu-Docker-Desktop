@@ -7,6 +7,9 @@ echo [*] Setting up users ...
 echo "New user: $user"
 echo "New password: $passwd"
 
+# Delete rdp sessions
+rm -f /var/run/xrdp/xrdp-sesman.pid > /dev/null
+
 mkdir -p /home/$user/
 cp -r /home/users/.config /home/$user/.config
 adduser $user --shell /bin/bash --home /home/$user --disabled-password --gecos GECOS; chown $user -R /home/$user; chgrp $user -R /home/$user
