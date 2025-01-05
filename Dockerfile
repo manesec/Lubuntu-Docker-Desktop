@@ -23,7 +23,7 @@ RUN echo debconf apt-fast/dlflag boolean true | debconf-set-selections
 RUN echo debconf apt-fast/aptmanager string apt-get | debconf-set-selections
 
 # Install Pre-Build Pulseaudio package
-RUN apt-fast install -y git autoconf pkg-config libssl-dev libpam0g-dev libx11-dev libxfixes-dev libxrandr-dev nasm xsltproc flex bison libxml2-dev dpkg-dev libcap-dev libpulse-dev
+RUN apt-fast install -y git autoconf pkg-config libssl-dev libpam0g-dev libx11-dev libxfixes-dev libxrandr-dev nasm xsltproc flex bison libxml2-dev dpkg-dev libcap-dev libpulse-dev libxkbfile-dev
 
 WORKDIR /tmp
 RUN apt-get source pulseaudio ; \
