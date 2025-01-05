@@ -7,7 +7,7 @@
 #                                   Builder
 # ---------------------------------------------------------------------------
 
-FROM ubuntu:mantic as builder
+FROM ubuntu:jammy as builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -54,7 +54,7 @@ RUN mkdir -p /tmp/output; cp src/.libs/*.so /tmp/output
 #                                   Container
 # ---------------------------------------------------------------------------
 
-FROM ubuntu:mantic
+FROM ubuntu:jammy
 
 ENV DEBIAN_FRONTEND=noninteractive
 
